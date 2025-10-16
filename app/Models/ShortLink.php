@@ -1,0 +1,29 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class ShortLink extends Model
+{
+    use HasFactory;
+
+    protected $table = 'short_links';
+
+    protected $fillable = [
+        'user_id',
+        'original_url',
+        'code',
+        'clicks',
+    ];
+
+    protected $casts = [
+        'clicks' => 'integer',
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+}

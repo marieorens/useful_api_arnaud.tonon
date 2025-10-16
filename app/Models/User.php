@@ -53,4 +53,12 @@ class User extends Authenticatable
             ->withPivot('active')
             ->withTimestamps();
     }
+
+    /**
+     * The short links created by the user.
+     */
+    public function shortLinks()
+    {
+        return $this->hasMany(ShortLink::class);
+    }
 }
