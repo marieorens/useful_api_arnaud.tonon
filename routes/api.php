@@ -21,6 +21,16 @@ Route::middleware('auth:sanctum')->group(function () {
         return response()->json(['message' => 'URL Shortener endpoint accessible']);
     })->middleware([\App\Http\Middleware\CheckModuleActive::class . ':1']);
     
+    // Short links CRUD
+    Route::post('/shorten', [\App\Http\Controllers\ShortLinkController::class, 'store'])
+        ->middleware([\App\Http\Middleware\CheckModuleActive::class . ':1']);
+
+    Route::get('/links', [\App\Http\Controllers\ShortLinkController::class, 'index'])
+        ->middleware([\App\Http\Middleware\CheckModuleActive::class . ':1']);
+
+    Route::delete('/links/{id}', [\App\Http\Controllers\ShortLinkController::class, 'destroy'])
+        ->middleware([\App\Http\Middleware\CheckModuleActive::class . ':1']);
+    
     Route::get('/wallet/info', function () {
         return response()->json(['message' => 'Wallet endpoint accessible']);
     })->middleware([\App\Http\Middleware\CheckModuleActive::class . ':2']);
