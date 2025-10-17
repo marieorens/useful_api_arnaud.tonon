@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+  "module": "Node16",
+  "ignoreDeprecations": "6.0",
+  "moduleResolution": "node16",
+  "baseUrl": "./",
+    "paths": {
+      "@/*": [
+        "src/*"
+      ]
+    },
+    "lib": [
+      "esnext",
+      "dom",
+      "dom.iterable",
+      "scripthost"
+    ]
+  }
+}
