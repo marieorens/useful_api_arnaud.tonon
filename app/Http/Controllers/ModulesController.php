@@ -7,9 +7,21 @@ use App\Models\Module;
 
 class ModulesController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return response()->json(Module::select('id','name','description')->get());
+        $user = $request->user();
+        $modules = Module::select('id','name','description')->get();
+
+        $userModules = $user
+            ? $user->modules()->pluck('active', 'module_id')->toArray()
+            : [];
+
+        $modules = $modules->map(function ($module) use ($userModules) {
+            $module->active = isset($userModules[$module->id]) ? (bool)$userModules[$module->id] : false;
+            return $module;
+        });
+
+        return response()->json($modules);
     }
 
     public function activate(Request $request, $id)
